@@ -1,0 +1,387 @@
+<html>
+	<head>
+		
+		<!-- <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-slider.min.css') }}">
+		<script src="{{ url_for('static', filename='js/bootstrap-slider.min.js') }}"></script>
+
+		<link href="{{ url_for('static', filename='css/bootstrap-colorpicker.css') }}" rel="stylesheet">
+		<script src="{{ url_for('static', filename='js/bootstrap-colorpicker.js') }}"></script>
+
+		<script src="{{ url_for('static', filename='js/fabric.min.js') }}"></script>
+
+		<link href="{{ url_for('static', filename='css/tui-color-picker.css') }}" rel="stylesheet">
+		<link href="{{ url_for('static', filename='css/tui-image-editor.min.css') }}" rel="stylesheet">
+		<script src="{{ url_for('static', filename='js/tui-code-snippet.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/tui-color-picker.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/tui-image-editor.min.js') }}"></script> -->
+		
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js"></script>
+
+		<link href="../static/css/bootstrap-colorpicker.css" rel="stylesheet">
+		<script src="../static/js/bootstrap-colorpicker.js"></script>
+
+		<script src="../static/js/fabric.min.js"></script>
+
+		<link href="../static/css/tui-color-picker.css" rel="stylesheet">
+		<link href="../static/css/tui-image-editor.min.css" rel="stylesheet">
+		<script src="../static/js/tui-code-snippet.min.js"></script>
+		<script src="../static/js/tui-color-picker.js"></script>
+		<script src="../static/js/tui-image-editor.min.js"></script>
+
+		
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<br>
+			<div class="row">
+				<div class="col-sm-12" align="center">
+					<h1> A Flexible Neural Renderer for Material Visualization </h1>
+					<h4> Anonymous Author(s) </h4>
+					<hr>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4" align="left">
+					<b>Phi (Azimuthal angle) of sun</b><br>
+					<input type="range" value="100" min="10" max="170" id="phi">
+					<br><br>
+					<b>Theta (Polar angle) of sun</b><br>
+					<input type="range" value="100" min="10" max="350" id="theta">
+					<br><br>
+					<b>Cloudiness (Turbidity)</b><br>
+					<input type="range" value="2" min="0" max="3" id="cloudiness">
+				</div>
+				<div class="col-sm-5" align="">
+					<img width="400px" height="400px" id="result" src="{{ url_for('static', filename='output.png') }}">
+					<!-- <img width="400px" height="400px" id="result" src="../static/default_shaderball.png"> -->
+					<br>
+				</div>
+				<!-- <div class="col-sm-3">
+					<b>Usage instructions </b>
+					<ul>
+						<li></li>
+					</ul>
+				</div> -->
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-3" align="center">
+					<canvas id="diffuse" width="200" height="200" style="border:1px solid #d3d3d3;"></canvas>
+					<p>Diffuse</p>
+					<!-- <select id="diffuse-mode-selector">
+						<option>Pencil</option>
+						<option>Spray</option>
+					</select> -->
+					<form action = "#" method = "POST" enctype = "multipart/form-data" id="diffuse-form">
+						<input type = "file" name = "file" />
+						<input type = "submit"/>
+					</form>
+					<input type="color" value="#005E7A" id="diffuse-color">
+					<input type="range" value="30" min="0" max="150" id="diffuse-line-width">
+					<br><br>
+					<button id="clear-diffuse" class="btn btn-danger">Clear</button>
+				</div>
+				<div class="col-sm-3" align="center">
+					<canvas id="normal" width="200" height="200" style="border:1px solid #d3d3d3;"></canvas>
+					<p>Normal</p>
+					<form action = "#" method = "POST" enctype = "multipart/form-data" id="normal-form">
+						<input type = "file" name = "file" />
+						<input type = "submit"/>
+					</form>
+					<input type="color" value="#7f7ffe" id="normal-color">
+					<input type="range" value="30" min="0" max="150" id="normal-line-width">
+					<br><br>
+					<button id="clear-normal" class="btn btn-danger">Clear</button>
+				</div>
+				<div class="col-sm-3" align="center">
+					<canvas id="specular" width="200" height="200" style="border:1px solid #d3d3d3;"></canvas>
+					<p>Specular</p>
+					<!-- <select id="specular-mode-selector">
+						<option>Pencil</option>
+						<option>Spray</option>
+					</select> -->
+					<form action = "#" method = "POST" enctype = "multipart/form-data" id="specular-form">
+						<input type = "file" name = "file" />
+						<input type = "submit"/>
+					</form>
+					<input type="color" value="#ededed" id="specular-color">
+					<input type="range" value="30" min="0" max="150" id="specular-line-width">
+					<br><br>
+					<button id="clear-specular" class="btn btn-danger">Clear</button>
+				</div>
+				<div class="col-sm-3" align="center">
+					<canvas id="roughness" width="200" height="200" style="border:1px solid #d3d3d3;"></canvas>
+					<p>Roughness</p>
+					<!-- <select id="roughness-mode-selector">
+						<option>Pencil</option>
+						<option>Spray</option>
+					</select> -->
+					<form action = "#" method = "POST" enctype = "multipart/form-data" id="roughness-form">
+						<input type = "file" name = "file" />
+						<input type = "submit"/>
+					</form>
+					<input type="color" value="#e3e3e3" id="roughness-color">
+					<input type="range" value="30" min="0" max="150" id="roughness-line-width">
+					<br><br>
+					<button id="clear-roughness" class="btn btn-danger">Clear</button>
+				</div>
+			</div>
+			<br><br>
+		</div>
+
+		<script type="text/javascript">
+
+			var d = new Date();
+
+			var diffuse_canvas = new fabric.Canvas('diffuse', {
+			    isDrawingMode: true
+			 });
+			var normal_canvas = new fabric.Canvas('normal', {
+			    isDrawingMode: true
+			 });
+			var specular_canvas = new fabric.Canvas('specular', {
+			    isDrawingMode: true
+			 });
+			var roughness_canvas = new fabric.Canvas('roughness', {
+			    isDrawingMode: true
+			 });
+
+			var render = function() {
+				$.post("/render", {ok: 'ok'}, 
+				function(data, status) {
+					$("#result").attr("src", "/static/output.png?"+d.getTime());
+
+					console.log("Data Sent");
+				})
+			}
+
+			var send_data = function() {
+				var phi = $('#phi').val();
+				var theta = $('#theta').val();
+				var cloudiness = $('#cloudiness').val();
+
+				var diffuse_img = diffuse_canvas.toDataURL();
+				var normal_img = normal_canvas.toDataURL();
+				var specular_img = specular_canvas.toDataURL();
+				var roughness_img = roughness_canvas.toDataURL();
+
+				$.post("/send-parameters", {
+					phi: phi,
+					theta: theta,
+					cloudiness: cloudiness,
+
+					diffuse_img: diffuse_img,
+					normal_img: normal_img,
+					specular_img: specular_img,
+					roughness_img: roughness_img
+				}, 
+				function(data, status) {
+					d = new Date();
+					$("#result").attr("src", "/static/output.png?"+d.getTime());
+
+					console.log("Data Sent");
+				})
+			}
+
+			$('#diffuse-form').on('submit', (function(e) {
+				e.preventDefault();
+				diffuse_canvas.clear();
+
+				$.ajax({
+					url: '/diffuse-upload',
+					type: 'POST',
+					data: new FormData(this),
+					contentType: false,
+			        cache: false,
+			   		processData:false,
+			   		success: function(data) {
+			   			fabric.Image.fromURL('/static/diffuse.png?'+d.getTime(), function(myImg) {
+							var img1 = myImg.set({ left: 0, top: 0 ,width:200,height:200});
+							diffuse_canvas.add(img1); 
+							diffuse_canvas.renderAll();
+
+							send_data();
+						});
+			   		}
+				})
+			}));
+			$('#normal-form').on('submit', (function(e) {
+				e.preventDefault();
+				normal_canvas.clear();
+
+				$.ajax({
+					url: '/normal-upload',
+					type: 'POST',
+					data: new FormData(this),
+					contentType: false,
+			        cache: false,
+			   		processData:false,
+			   		success: function(data) {
+			   			fabric.Image.fromURL('/static/normal.png?'+d.getTime(), function(myImg) {
+							var img1 = myImg.set({ left: 0, top: 0 ,width:200,height:200});
+							normal_canvas.add(img1); 
+							normal_canvas.renderAll();
+
+							send_data();
+						});
+			   		}
+				})
+			}));
+			$('#specular-form').on('submit', (function(e) {
+				e.preventDefault();
+				specular_canvas.clear();
+
+				$.ajax({
+					url: '/specular-upload',
+					type: 'POST',
+					data: new FormData(this),
+					contentType: false,
+			        cache: false,
+			   		processData:false,
+			   		success: function(data) {
+			   			fabric.Image.fromURL('/static/specularity.png?'+d.getTime(), function(myImg) {
+							var img1 = myImg.set({ left: 0, top: 0 ,width:200,height:200});
+							specular_canvas.add(img1); 
+							specular_canvas.renderAll();
+
+							send_data();
+						});
+			   		}
+				})
+			}));
+			$('#roughness-form').on('submit', (function(e) {
+				e.preventDefault();
+				roughness_canvas.clear();
+
+				$.ajax({
+					url: '/roughness-upload',
+					type: 'POST',
+					data: new FormData(this),
+					contentType: false,
+			        cache: false,
+			   		processData:false,
+			   		success: function(data) {
+			   			fabric.Image.fromURL('/static/roughness.png?'+d.getTime(), function(myImg) {
+							var img1 = myImg.set({ left: 0, top: 0 ,width:200,height:200});
+							roughness_canvas.add(img1); 
+							roughness_canvas.renderAll();
+
+							send_data();
+						});
+			   		}
+				})
+			}));
+
+			$('#phi')[0].onchange = function() {
+			    send_data();
+			};
+			$('#theta')[0].onchange = function() {
+			    send_data();
+			};
+			$('#cloudiness')[0].onchange = function() {
+			    send_data();
+			};
+
+			diffuse_canvas.on('mouse:up', function(options) {
+				send_data();
+				console.log('Diffuse Mouse Up');
+			});
+			normal_canvas.on('mouse:up', function(options) {
+				send_data();
+				console.log('Normal Mouse Up');
+			});
+			specular_canvas.on('mouse:up', function(options) {
+				send_data();
+				console.log('Specular Mouse Up');
+			});
+			roughness_canvas.on('mouse:up', function(options) {
+				send_data();
+				console.log('Roughness Mouse Up');
+			});
+
+			diffuse_canvas.setBackgroundColor($('#diffuse-color')[0].value, diffuse_canvas.renderAll.bind(diffuse_canvas));
+			normal_canvas.setBackgroundColor($('#normal-color')[0].value, normal_canvas.renderAll.bind(normal_canvas));
+			specular_canvas.setBackgroundColor($('#specular-color')[0].value, specular_canvas.renderAll.bind(specular_canvas));
+			roughness_canvas.setBackgroundColor($('#roughness-color')[0].value, roughness_canvas.renderAll.bind(roughness_canvas));
+
+			// fabric.Image.fromURL('/static/diffuse.png?'+d.getTime(), function(myImg) {
+			// 	var img1 = myImg.set({ left: 0, top: 0 ,width:200,height:200});
+			// 	diffuse_canvas.add(img1); 
+			// });
+			// fabric.Image.fromURL('/static/normal.png?'+d.getTime(), function(myImg) {
+			// 	var img1 = myImg.set({ left: 0, top: 0 ,width:200,height:200});
+			// 	normal_canvas.add(img1); 
+			// });
+			// fabric.Image.fromURL('/static/specularity.png?'+d.getTime(), function(myImg) {
+			// 	var img1 = myImg.set({ left: 0, top: 0 ,width:200,height:200});
+			// 	specular_canvas.add(img1); 
+			// });
+			// fabric.Image.fromURL('/static/roughness.png?'+d.getTime(), function(myImg) {
+			// 	var img1 = myImg.set({ left: 0, top: 0 ,width:200,height:200});
+			// 	roughness_canvas.add(img1); 
+			// });
+
+			diffuse_canvas.freeDrawingBrush.color = $('#diffuse-color')[0].value;
+			normal_canvas.freeDrawingBrush.color = $('#normal-color')[0].value;
+			specular_canvas.freeDrawingBrush.color = $('#specular-color')[0].value;
+			roughness_canvas.freeDrawingBrush.color = $('#roughness-color')[0].value;
+
+			diffuse_canvas.freeDrawingBrush.width = parseInt($('#diffuse-line-width')[0].value, 10) || 1;
+			normal_canvas.freeDrawingBrush.width = parseInt($('#normal-line-width')[0].value, 10) || 1;
+			specular_canvas.freeDrawingBrush.width = parseInt($('#specular-line-width')[0].value, 10) || 1;
+			roughness_canvas.freeDrawingBrush.width = parseInt($('#roughness-line-width')[0].value, 10) || 1;
+
+			$('#clear-diffuse')[0].onclick = function() { diffuse_canvas.clear() };
+			$('#clear-normal')[0].onclick = function() { normal_canvas.clear() };
+			$('#clear-specular')[0].onclick = function() { specular_canvas.clear() };
+			$('#clear-roughness')[0].onclick = function() { roughness_canvas.clear() };
+
+			$('#diffuse-color')[0].onchange = function() {
+				diffuse_canvas.freeDrawingBrush.color = this.value;
+			};
+			$('#normal-color')[0].onchange = function() {
+				normal_canvas.freeDrawingBrush.color = this.value;
+			};
+			$('#specular-color')[0].onchange = function() {
+				specular_canvas.freeDrawingBrush.color = this.value;
+			};
+			$('#roughness-color')[0].onchange = function() {
+				roughness_canvas.freeDrawingBrush.color = this.value;
+			};
+
+			$('#diffuse-line-width')[0].onchange = function() {
+			    diffuse_canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+			};
+			$('#normal-line-width')[0].onchange = function() {
+			    normal_canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+			};
+			$('#specular-line-width')[0].onchange = function() {
+			    specular_canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+			};
+			$('#roughness-line-width')[0].onchange = function() {
+			    roughness_canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1;
+			};
+
+			send_data()
+
+		</script>
+	</body>
+</html>
