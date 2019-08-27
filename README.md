@@ -1,5 +1,5 @@
 <h1 align="center">A Flexible Neural Renderer for Material Visualization</h1>
-<p align="center"><b>SIGGRAPH Asia 2019, Technical Briefs (In review)</b></p>
+<p align="center"><b>ArXiv</b></p>
 <div align="center">
   <span>
     <a href="https://scholar.google.co.in/citations?user=itJ7vawAAAAJ&hl=en">Aakash KT<sup>1</sup></a>,
