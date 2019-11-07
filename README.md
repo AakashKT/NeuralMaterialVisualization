@@ -14,7 +14,8 @@
 <div align="center">
   <span>
     <a href="https://aakashkt.github.io/neural-renderer-material-visualization.html">[Project page]</a>
-    <a href="">[arXiv]</a>
+    <a href="https://drive.google.com/file/d/15Y0nYnf2imHePU7PNrVXZFPzCGnScQqA/view?usp=sharing">[Final Version]</a>
+    <a href="https://arxiv.org/abs/1908.09530">[arXiv]</a>
     <a href="https://drive.google.com/drive/folders/1DXcVPr-g7H5SefmrOSs3xRGdMof0SBwZ?usp=sharing">[Data]</a>
     <a href="https://www.youtube.com/embed/yiBGF6Jycck">[Video]</a>
     <a href="">[bibtex]</a>
