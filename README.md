@@ -10,7 +10,7 @@
 </div>
 <p align="center"><sup>1</sup>CVIT, IIIT Hyderabad</p>
 <hr>
-<img src="https://aakashkt.github.io/teaser.jpg" width="900px" height="319px">
+<img src="https://aakashkt.github.io/assets/img/flexible_nr_teaser.jpg" width="900px" height="319px">
 <div align="center">
   <span>
     <a href="https://aakashkt.github.io/neural-renderer-material-visualization.html">[Project page]</a>
